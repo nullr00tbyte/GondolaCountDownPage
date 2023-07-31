@@ -1,112 +1,124 @@
-import Image from 'next/image'
+"use client";
+import Image from "next/image";
+import React, { useState, useEffect, useRef } from 'react';
+import moment from "moment";
 
 export default function Home() {
+  const backgroundImage = 'Gondola_Josue_Angela.svg';
+
+  const nextDate = moment('2023-10-04 07:50:00');
+  const [days, setDays] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [animationDuration, setAnimationDuration] = useState(60); // Default duration in seconds
+  const [PlayingSound, setPlayingSound] = useState(true)
+
+  const [songPercent, setSongPercent] = useState(0)
+
+  function calculateRemainTime() {
+    const secondsLeft = nextDate.diff(moment(), 'seconds');
+    const minutes = Math.floor(secondsLeft / 60) % 60;
+    const hours = Math.floor(secondsLeft / 3600) % 24;
+    const days = Math.floor(secondsLeft / 86400);
+    setSeconds(secondsLeft % 60);
+    setMinutes(minutes);
+    setHours(hours);
+    setDays(days);
+
+    // Interpolate the animation duration based on days remaining
+    const maxDuration = 30; // Maximum duration in seconds (image rotation in 1 minute)
+    const minDuration = 1; // Minimum duration in seconds (image rotation in 5 seconds)
+    const remainingDays = days + hours / 24 + minutes / (24 * 60) + seconds / (24 * 60 * 60);
+    const interpolatedDuration = minDuration + (remainingDays / 30) * (maxDuration - minDuration); // Adjust 30 based on your preference
+    setAnimationDuration(interpolatedDuration);
+  }
+
+  const audioRef = useRef(null);
+
+  function updateTimeSong(e) {
+    const audio = audioRef.current;
+    const duration = audio.duration
+    const currentTime = audio.currentTime
+
+    const toPlay = Math.round(((currentTime / duration) * 100))
+
+
+    setSongPercent(toPlay)
+  }
+  function playSound() {
+    const audio = audioRef.current;
+    audio.play()
+    setPlayingSound(false)
+  }
+
+  function pauseSound() {
+    const audio = audioRef.current;
+    audio.pause()
+    setPlayingSound(true)
+  }
+
+
+  useEffect(() => {
+
+    const timer = setInterval(() => {
+      calculateRemainTime();
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main className="bgImage">
+      <div className="grid h-screen justify-center items-center  " style={{ position: 'relative' }}>
+        <div className="drop-shadow-[25px_25px_60px_#fff] ">
+          <Image
+            className="drop-shadow-[-25px_-25px_60px_#f1889b] "
+            src={backgroundImage}
+            width={900}
+            height={0}
+            style={{
+              zIndex: -1,
+              animation: `rotation ${animationDuration}s infinite linear`,
+            }}
+          />
         </div>
-      </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+        <div className="grid columns-2 justify-center items-center">
+          <div>
+            <p className="text-5xl">{days} Dias, {hours} Horas, {minutes} Minutos, {seconds} Segundos</p>
+            <div className="flex items-center justify-center"> {/* Added a wrapper with flexbox */}
+              {PlayingSound ? <button onClick={playSound} className=" text-white font-bold py-2 px-4 rounded m-10">
+                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 16">
+                  <path d="M0 .984v14.032a1 1 0 0 0 1.506.845l12.006-7.016a.974.974 0 0 0 0-1.69L1.506.139A1 1 0 0 0 0 .984Z" />
+                </svg>
+              </button> : <button onClick={pauseSound} className=" text-white font-bold py-2 px-4 rounded m-10">
+                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 10 16">
+                  <path fillRule="evenodd" d="M0 .8C0 .358.32 0 .714 0h1.429c.394 0 .714.358.714.8v14.4c0 .442-.32.8-.714.8H.714a.678.678 0 0 1-.505-.234A.851.851 0 0 1 0 15.2V.8Zm7.143 0c0-.442.32-.8.714-.8h1.429c.19 0 .37.084.505.234.134.15.209.354.209.566v14.4c0 .442-.32.8-.714.8H7.857c-.394 0-.714-.358-.714-.8V.8Z" clipRule="evenodd" />
+                </svg>
+              </button>}
+              <div class="w-full items-center justify-center bg-red rounded-full h-2.5 mb-4 dark:bg-white">
+                <div class="bg-blue h-2.5 rounded-full dark:bg-pink-600" style={{
+                  width: `${songPercent}%`
+                }}></div>
+                CLAUDE DEBUSSY: CLAIR DE LUNE
+              </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+              <div class="items-center justify-center h-2.5 mb-8 ml-3 ">
+              <svg class="w-6 h-6 text-red-800 dark:text-red" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+    <path d="M17.947 2.053a5.209 5.209 0 0 0-3.793-1.53A6.414 6.414 0 0 0 10 2.311 6.482 6.482 0 0 0 5.824.5a5.2 5.2 0 0 0-3.8 1.521c-1.915 1.916-2.315 5.392.625 8.333l7 7a.5.5 0 0 0 .708 0l7-7a6.6 6.6 0 0 0 2.123-4.508 5.179 5.179 0 0 0-1.533-3.793Z"/>
+  </svg>
+              </div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+            </div>
+            <audio onTimeUpdate={updateTimeSong} ref={audioRef}>
+              <source src="clair_de_lune.mp3" type="audio/mpeg" />
+              Tu navegador no soporta la reproducción de audio.
+            </audio>
+          </div>
+        </div>
       </div>
     </main>
   )

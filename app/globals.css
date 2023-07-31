@@ -25,3 +25,61 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@keyframes rotation {
+  from {
+    transform: rotate(359deg);
+  }
+  to {
+    transform: rotate(0);
+  }
+}
+
+/* Estilos para el contenedor del audio */
+
+
+/* Estilos para los controles de audio */
+audio {
+  background-color: transparent; /* Hace que los controles sean transparentes */
+}
+
+/* Estilos para los botones de reproducción, pausa, etc. */
+audio::-webkit-media-controls-start-playback-button,
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-pause-button {
+  color: #007bff; /* Color de los botones de reproducción y pausa */
+}
+
+/* Estilos para la barra de progreso del audio */
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-seek-back-button,
+audio::-webkit-media-controls-seek-forward-button,
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-volume-slider,
+audio::-webkit-media-controls-fullscreen-button {
+  display: none; /* Oculta la barra de progreso y otros controles */
+}
+
+.bgImage {
+
+position: relative;
+}
+
+.bgImage::before{
+  background-image: url("http://localhost:3000/bg.jpg");
+filter: blur(10px) ;
+
+content: ' ';
+display: block;
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+opacity: 0.1;
+
+background-repeat: no-repeat;
+background-position: 25% 0;
+background-size: cover;
+}
