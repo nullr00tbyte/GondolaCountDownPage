@@ -99,8 +99,8 @@ export default function Home() {
                   <path fillRule="evenodd" d="M0 .8C0 .358.32 0 .714 0h1.429c.394 0 .714.358.714.8v14.4c0 .442-.32.8-.714.8H.714a.678.678 0 0 1-.505-.234A.851.851 0 0 1 0 15.2V.8Zm7.143 0c0-.442.32-.8.714-.8h1.429c.19 0 .37.084.505.234.134.15.209.354.209.566v14.4c0 .442-.32.8-.714.8H7.857c-.394 0-.714-.358-.714-.8V.8Z" clipRule="evenodd" />
                 </svg>
               </button>}
-              <div class="w-full items-center justify-center bg-red rounded-full h-2.5 mb-4 dark:bg-white">
-                <div class="bg-blue h-2.5 rounded-full dark:bg-pink-600" style={{
+              <div class="w-full items-center justify-center bg-red rounded-full h-2.5 mb-4 bg-black dark:bg-white">
+                <div class="bg-blue h-2.5 rounded-full bg-pink-600 dark:bg-pink-600" style={{
                   width: `${songPercent}%`
                 }}></div>
                 Liszt - Liebestraum No. 3
