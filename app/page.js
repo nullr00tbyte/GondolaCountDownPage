@@ -103,20 +103,23 @@ export default function Home() {
                 <div class="bg-blue h-2.5 rounded-full dark:bg-pink-600" style={{
                   width: `${songPercent}%`
                 }}></div>
-                CLAUDE DEBUSSY: CLAIR DE LUNE
+                Liszt - Liebestraum No. 3
               </div>
 
               <div class="items-center justify-center h-2.5 mb-8 ml-3 ">
-              <svg class="w-6 h-6 text-red-800 dark:text-red" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-    <path d="M17.947 2.053a5.209 5.209 0 0 0-3.793-1.53A6.414 6.414 0 0 0 10 2.311 6.482 6.482 0 0 0 5.824.5a5.2 5.2 0 0 0-3.8 1.521c-1.915 1.916-2.315 5.392.625 8.333l7 7a.5.5 0 0 0 .708 0l7-7a6.6 6.6 0 0 0 2.123-4.508 5.179 5.179 0 0 0-1.533-3.793Z"/>
-  </svg>
+                <svg class="w-6 h-6 text-red-800 dark:text-red" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+                  <path d="M17.947 2.053a5.209 5.209 0 0 0-3.793-1.53A6.414 6.414 0 0 0 10 2.311 6.482 6.482 0 0 0 5.824.5a5.2 5.2 0 0 0-3.8 1.521c-1.915 1.916-2.315 5.392.625 8.333l7 7a.5.5 0 0 0 .708 0l7-7a6.6 6.6 0 0 0 2.123-4.508 5.179 5.179 0 0 0-1.533-3.793Z" />
+                </svg>
               </div>
 
             </div>
             <audio onTimeUpdate={updateTimeSong} ref={audioRef}>
-              <source src="clair_de_lune.mp3" type="audio/mpeg" />
+              <source src="love_dream.mp3" type="audio/mpeg" />
               Tu navegador no soporta la reproducción de audio.
             </audio>
+          </div>
+          <div className="flex items-center justify-center">
+            <p className="italic">En tus abrazos encuentro mi refugio, en tus ojos, mi eterna pasión.</p>
           </div>
         </div>
       </div>

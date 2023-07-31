@@ -67,7 +67,7 @@ position: relative;
 }
 
 .bgImage::before{
-  background-image: url("http://localhost:3000/bg.jpg");
+  background-image: url("/bg.jpg");
 filter: blur(10px) ;
 
 content: ' ';
