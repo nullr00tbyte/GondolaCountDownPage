@@ -151,7 +151,7 @@ export default function Home() {
                 <div className="bg-blue h-2.5 rounded-full bg-gradient-to-r from-white to-pink-500" style={{
                   width: `${songPercent}%`
                 }}></div>
-                Miranda! - Perfecta 
+                Radio - Lana Del Rey
               </div>
 
               <div className="items-center justify-center h-2.5 mb-8 ml-3 mr-3 ">
@@ -162,12 +162,14 @@ export default function Home() {
 
             </div>
             <audio onTimeUpdate={updateTimeSong} ref={audioRef}>
-              <source src="perfecta.mp3" type="audio/mpeg" />
+              <source src="lana.mp3" type="audio/mpeg" />
               Tu navegador no soporta la reproducción de audio.
             </audio>
           </div>
           <div className="flex text-center items-center justify-center">
-            <p className="italic ">En el lienzo del destino, nuestros corazones se entrelazaron.</p>
+            <p className="italic ">Now my life is sweet like cinnamon
+Like a fucking dream I'm living in
+Baby, love me 'cause I'm playing on the radio</p>
           </div>
         </div>
       </div>
