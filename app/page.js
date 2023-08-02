@@ -120,6 +120,7 @@ export default function Home() {
         <div className="drop-shadow-[25px_25px_60px_#fff] ">
           <a href="#" onClick={handleNotificationClick}>
             <Image
+            alt="Gondola Duality"
               className="drop-shadow-[-25px_-25px_60px_#f1889b]"
               src={backgroundImage}
               width={900}
@@ -168,8 +169,8 @@ export default function Home() {
           </div>
           <div className="flex text-center items-center justify-center">
             <p className="italic ">Now my life is sweet like cinnamon
-Like a fucking dream I'm living in
-Baby, love me 'cause I'm playing on the radio</p>
+Like a fucking dream Im living in
+Baby, love me cause Im playing on the radio</p>
           </div>
         </div>
       </div>
