@@ -113,7 +113,67 @@ export default function Home() {
       clearInterval(timer);
     };
   }, []);
+  const Messages = [
+    "En el encuentro de dos almas, se despiertan infinitas posibilidades.",
+    "La distancia entre tú y yo solo existe en la ilusión de la separación.",
+    "Eres como un espejo, reflejando la belleza que hay en mí.",
+    "El amor es un misterio, un laberinto sin fin de conexiones y significados.",
+    "Cada instante de espera es un peldaño que nos acerca al reencuentro.",
+    "Eres un enigma que me cautiva, una pregunta sin respuesta.",
+    "El tiempo es solo una ilusión, nuestro amor trasciende las dimensiones.",
+    "En cada mirada se revela el universo que vive en tus ojos.",
+    "La esencia de la vida es fluir como un río, sin resistencia ni apego.",
+    "Eres un sueño dentro de un sueño, una realidad tejida de fantasías.",
+    "Nuestro amor es un eco en el tiempo, resonando en el corazón del universo.",
+    "En el abrazo del infinito, nuestros corazones encuentran su hogar.",
+    "Eres un universo por descubrir, con galaxias de emociones y pensamientos.",
+    "La existencia es un baile cósmico, donde nuestras almas se entrelazan.",
+    "En cada palabra compartida se forja el entendimiento de dos seres.",
+    "El amor es un viaje eterno, en el cual siempre estamos en camino.",
+    "Eres una melodía en la sinfonía del cosmos, un acorde perfecto.",
+    "La eternidad se revela en un instante, cuando nuestros corazones se encuentran.",
+    "Somos como hojas flotando en el río del destino, navegando juntos.",
+    "En cada encuentro, el universo conspira para unir nuestras almas.",
+    "Eres el enigma que da sentido a mi existencia, un puzle por resolver.",
+    "La conexión entre tú y yo trasciende cualquier lógica o razón.",
+    "Eres la danza del ser, en el fluir constante del tiempo y el espacio.",
+    "En cada suspiro, nos sumergimos en el océano de lo desconocido.",
+    "El amor es una búsqueda infinita, donde cada encuentro es un hallazgo.",
+    "Eres una pregunta sin respuesta, una búsqueda incesante de significado.",
+    "La vida es un lienzo en blanco, donde escribimos nuestra historia juntos.",
+    "En el tejido del destino, nuestros hilos se entrelazan con propósito.",
+    "Eres el reflejo de mi alma, en el espejo de la existencia.",
+    "El amor es como un río que fluye sin cesar, llevándonos hacia lo desconocido.",
+    "En cada pensamiento, encuentro una razón para amarte más.",
+    "Eres la pregunta que da sentido a mi búsqueda, un enigma por resolver.",
+    "La vida es una danza cósmica, donde nuestros pasos están sincronizados.",
+    "En cada latido, se dibuja la geometría del amor en el universo.",
+    "Eres la melodía que mece mi corazón, en el ritmo de la existencia.",
+    "El amor es un enigma divino, donde cada respuesta conduce a una nueva pregunta.",
+    "En el silencio del universo, nuestras almas se encuentran sin palabras.",
+    "Eres una partícula en el tejido del cosmos, conectada con todo lo que existe.",
+    "La esencia del amor es el encuentro de dos almas en el eterno ahora.",
+    "En cada encuentro, la sincronicidad del universo nos une en un solo latido.",
+    "Eres el eco de mi ser, resonando en los confines del universo.",
+    "El amor es una danza eterna, donde nuestros pasos se funden en un solo compás.",
+    "En cada pensamiento, encuentro la poesía de tu existencia.",
+    "Eres la melodía que mece mi alma, en el concierto del cosmos.",
+    "La vida es una obra maestra, donde tú eres mi musa y mi inspiración.",
+    "En el lienzo de la realidad, pintamos nuestro amor con colores eternos.",
+    "Eres la clave que desvela el misterio de mi ser, la respuesta que anhelo encontrar.",
+    "El amor es un sendero sin fin, donde cada paso nos acerca a la verdad.",
+    "En cada mirada, descubro un universo de posibilidades.",
+    "Eres la estrella que guía mi destino, en el firmamento de la existencia.",
+    "La esencia del amor es el encuentro de dos almas que se reconocen en la eternidad.",
+    "En cada encuentro, la sincronicidad del universo nos une en un solo latido.",
+    "Eres el enigma que impulsa mi búsqueda, una pregunta sin respuesta.",
+    "El amor es una sinfonía que resuena en el corazón, en cada nota del destino.",
+    "En la danza cósmica, nuestros pasos se entrelazan con propósito divino.",
+  ];
+  
 
+  
+  
   return (
     <main className={themeMode ? 'bgImage' : 'bgImageLight'} >
       <div className="grid h-screen justify-center items-center  " style={{ position: 'relative' }}>
@@ -139,27 +199,7 @@ export default function Home() {
               <p className="text-center  sm:text-xl md:text-5xl">{days} Dias, {hours} Horas, {minutes} Minutos, {seconds} Segundos</p>
             </div>
             <div className="flex items-center justify-center">
-              {PlayingSound ? <button onClick={playSound} className="font-bold py-2 px-4 rounded m-10">
-                <svg className="w-6 h-6 text-black dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 16">
-                  <path d="M0 .984v14.032a1 1 0 0 0 1.506.845l12.006-7.016a.974.974 0 0 0 0-1.69L1.506.139A1 1 0 0 0 0 .984Z" />
-                </svg>
-              </button> : <button onClick={pauseSound} className="text-white font-bold py-2 px-4 rounded m-10">
-                <svg className="w-6 h-6 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 10 16">
-                  <path fillRule="evenodd" d="M0 .8C0 .358.32 0 .714 0h1.429c.394 0 .714.358.714.8v14.4c0 .442-.32.8-.714.8H.714a.678.678 0 0 1-.505-.234A.851.851 0 0 1 0 15.2V.8Zm7.143 0c0-.442.32-.8.714-.8h1.429c.19 0 .37.084.505.234.134.15.209.354.209.566v14.4c0 .442-.32.8-.714.8H7.857c-.394 0-.714-.358-.714-.8V.8Z" clipRule="evenodd" />
-                </svg>
-              </button>}
-              <div className="w-full items-center justify-center bg-red rounded-full h-2.5 mb-4 bg-black dark:bg-white">
-                <div className="bg-blue h-2.5 rounded-full bg-gradient-to-r from-white to-pink-500" style={{
-                  width: `${songPercent}%`
-                }}></div>
-                Radio - Lana Del Rey
-              </div>
-
-              <div className="items-center justify-center h-2.5 mb-8 ml-3 mr-3 ">
-                <svg className="w-6 h-6  text-red-800 dark:text-red" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                  <path d="M17.947 2.053a5.209 5.209 0 0 0-3.793-1.53A6.414 6.414 0 0 0 10 2.311 6.482 6.482 0 0 0 5.824.5a5.2 5.2 0 0 0-3.8 1.521c-1.915 1.916-2.315 5.392.625 8.333l7 7a.5.5 0 0 0 .708 0l7-7a6.6 6.6 0 0 0 2.123-4.508 5.179 5.179 0 0 0-1.533-3.793Z" />
-                </svg>
-              </div>
+            <iframe className="pt-5 pb-5 shadow-5" width="560" height="315" src="https://www.youtube.com/embed/EvkCcbd7oJM?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
             </div>
             <audio onTimeUpdate={updateTimeSong} ref={audioRef}>
@@ -168,9 +208,7 @@ export default function Home() {
             </audio>
           </div>
           <div className="flex text-center items-center justify-center">
-            <p className="italic ">Now my life is sweet like cinnamon
-Like a fucking dream Im living in
-Baby, love me cause Im playing on the radio</p>
+            <p className="italic ">{Messages[days-6]} </p>
           </div>
         </div>
       </div>
